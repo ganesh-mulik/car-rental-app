@@ -1,40 +1,40 @@
 <div class="container-fluid">
     <div class="row"> 
-      <div class="col-6 text-start">
+      <div class="col-8 text-center display-5 text-primary">
         Car Portal
       </div>
-      <div class="col-6 text-end">
-        <button class="btn btn-warning btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="addNew()"> Add New</button>
+      <div class="col-4 text-center pt-2">
+        <button class="btn btn-warning btn-md" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="addNew()"> Add New</button>
       </div>
     </div>    
       <div class="row">
         @for (item of carData; track item) {
-          <div class="col-3 pt-3">
-            <div class="card">
+          <div class="col-3 pt-4">
+            <div class="card border border-primary">
               <img
-                [src]="item.carImage" height="100" />
+                [src]="item.carImage" height="200" />
               <div class="card-body">
                 <div class="row">
-                  <div class="col-6 text-start">
+                  <div class="col-6 text-start pt-1">
                     <span>{{item.brand}}</span>({{item.model}})
                   </div>
-                  <div class="col-6 text-end">
+                  <div class="col-6 text-end pt-1">
                     <span> {{item.year}}</span>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-6 text-start">
+                  <div class="col-6 text-start pt-1">
                     <span>{{item.color}}</span>
                   </div>
-                  <div class="col-6 text-end">
+                  <div class="col-6 text-end pt-1">
                     <span> ${{item.dailyRate}}</span>
                   </div>
                 </div>               
                 <div class="row">
-                  <div class="col-6 text-start">
+                  <div class="col-6 text-start pt-1">
                     <button class="btn btn-outline-danger btn-sm" (click)="deleteCar(item.carId)">Delete</button>
                   </div>
-                  <div class="col-6 text-end">
+                  <div class="col-6 text-end pt-1">
                     <button class="btn btn-outline-success btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="onEdit(item)">Edit</button>
                   </div>
                 </div>

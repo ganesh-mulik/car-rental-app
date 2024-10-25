@@ -75,19 +75,22 @@ export class CarsComponent implements OnInit{
   }
 
   deleteCar(id:number){
-    this.carService.deleteCar(id).subscribe((res:any)=>{
-      if(res.result){
-        alert("Record deleted successfully");
-        this.getCars();
-      }
-      else{
-        alert(res.message);
-      }
-    })
+    const isDelete = confirm("Do you want to delete record?");
+    if(isDelete){
+      this.carService.deleteCar(id).subscribe((res:any)=>{
+        if(res.result){
+          alert("Record deleted successfully");
+          this.getCars();
+        }
+        else{
+          alert(res.message);
+        }
+      })
+    }        
   }
 
   onEdit(data:any){
-    this.carForm = new FormGroup({    
+    this.carForm = new FormGroup({  
       carId:new FormControl(data.carId),
       brand:new FormControl(data.brand),
       model:new FormControl(data.model),
@@ -95,8 +98,7 @@ export class CarsComponent implements OnInit{
       color:new FormControl(data.color),
       dailyRate:new FormControl(data.dailyRate),
       carImage:new FormControl(data.carImage),
-      regNo:new FormControl(data.regNo)   
-    
+      regNo:new FormControl(data.regNo)    
   });
   }
 
