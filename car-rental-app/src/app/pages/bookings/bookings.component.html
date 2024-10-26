@@ -13,27 +13,36 @@
           <table class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
               <tr>
+                <th>Sr No</th>
                 <th> Name</th>
-                <th> City</th>
+                <th>Date</th>
                 <th>Mobile No</th>
-                <th>Email</th>
-                <th>Car</th>
+                <th>Booking UserId</th>
+                <th>Brand</th>
+                <th>Model</th>
                 <th>Discount</th>
                 <th>Total Bill Amount</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Name</td>
-                <td> City</td>
-                <td>Mobile No</td>
-                <td>Email</td>
-                <td>Car</td>
-                <td>Discount</td>
-                <td>Total Bill Amount</td>
-                <td>Action</td>
-              </tr>
+              @for (item of bookingsData; track $index) {
+                <tr>                  
+                  <td>{{$index+1}}</td>
+                  <td>{{item.customerName}}</td>
+                  <td>{{item.bookingDate}}</td>
+                  <td>{{item.mobileNo}}</td>
+                  <td>{{item.bookingUid}}</td>
+                  <td>{{item.brand}}</td>
+                  <td>{{item.model}}</td>
+                  <td>{{item.discount}}</td>
+                  <td>{{item.totalBillAmount}}</td>
+                  <td class="action">Actions</td>
+
+                  <!-- <td><button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="updateBookingsData(item)">Update</button>
+                    <button class="btn btn-danger btn-sm">Delete</button></td> -->
+                </tr>
+              }
             </tbody>
           </table>
         </div>
@@ -46,7 +55,7 @@
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">New Booking</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body" [formGroup]="bookingForm">
       <div class="row">
         <div class="col-md-12"> 
           <form id="newBookingForm">
@@ -54,61 +63,75 @@
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="customerName">Customer Name</label>
-                  <input type="text" class="form-control" id="customerName" />
+                  <input type="text" class="form-control" id="customerName" formControlName="CustomerName"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="customerCity">Customer City</label>
-                  <input type="text" class="form-control" id="customerCity" />
+                  <input type="text" class="form-control" id="customerCity" formControlName="CustomerCity"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="mobileNo">Mobile No</label>
-                  <input type="text" class="form-control" id="MobileNo" />
+                  <input type="text" class="form-control" id="MobileNo" formControlName="MobileNo"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="Email" />
+                  <input type="email" class="form-control" id="Email" formControlName="Email"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group px-3">
+                  <label for="BookingId">Booking Id</label>
+                  <input type="number" class="form-control" id="BookingId" formControlName="BookingId"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                     <label for="car">Select Car</label>
-                    <select class="form-control" id="CarId">
-                        <option>Select Car</option>
-                        <option>Car 1</option>
-                        <option>Car 2</option>
+                    <select class="form-control" id="CarId" formControlName="CarId">
+                      <option>Select Car</option>
+                      @for (item of CarData; track $index) {
+                        <option>{{item.carId}}</option>          
+                      }         
                     </select>
                   </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="bookingDate">Booking Date</label>
-                  <input type="datetime-local" class="form-control" id="BookingDate" />
+                  <input type="datetime-local" class="form-control" id="BookingDate" formControlName="BookingDate"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="discount">Discount</label>
-                  <input type="number" class="form-control" id="Discount" />
+                  <input type="number" class="form-control" id="Discount" formControlName="Discount"/>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-group px-3">
                   <label for="totalBillAmount">Total Bill Amount</label>
-                  <input type="number" class="form-control" id="TotalBillAmount" />
+                  <input type="number" class="form-control" id="TotalBillAmount" formControlName="TotalBillAmount"/>
                 </div>
               </div>
             </div>
-            <div class="row pt-3 booking-buttons">           
-                <button type="submit" class="btn btn-primary btn-sm ms-2 col-3">Submit</button>
+            <div class="row pt-3 booking-buttons">
+              <button type="submit" class="btn btn-primary btn-sm ms-2 col-3" (click)="saveBookingData()">Submit</button>
+              <button type="button" class="btn btn-warning btn-sm col-3">Update</button>
+              <button type="button" class="btn btn-danger btn-sm col-3">Clear</button>
+              <!-- @if(bookingForm.controls['BookingId'].value===0){
+                <button type="submit" class="btn btn-primary btn-sm ms-2 col-3" (click)="saveBookingData()">Submit</button>
                 <button type="button" class="btn btn-warning btn-sm col-3">Update</button>
-                <button type="button" class="btn btn-danger btn-sm col-3">Clear</button>             
-            </div>            
+              }@else {
+                <button type="button" class="btn btn-warning btn-sm col-3">Update</button>
+              } -->
+                <!-- <button type="button" class="btn btn-danger btn-sm col-3">Clear</button> -->
+            </div>        
           </form>
         </div>
       </div> 

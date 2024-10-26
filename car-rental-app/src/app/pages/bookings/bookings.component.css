@@ -3,3 +3,10 @@
     display: flex;
     justify-content: space-around;
 }
+.action{
+    display: flex;
+    justify-content: space-around;
+}
+td,th{
+    text-align: center;
+}
