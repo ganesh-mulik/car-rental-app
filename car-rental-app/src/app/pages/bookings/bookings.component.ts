@@ -35,7 +35,12 @@ export class BookingsComponent implements OnInit{
 
   getBookingData(){
     this.bookingService.getAllBookings().subscribe((res:any)=>{
-      this.bookingsData = res.data;
+      if(res.result){
+        this.bookingsData = res.data;
+      }
+      else{
+        alert(res.message);
+      }
     })
   }
 
@@ -47,8 +52,26 @@ export class BookingsComponent implements OnInit{
 
   saveBookingData(){
     const formData = this.bookingForm.value;
-    this.bookingService.createBooking(formData);
-    this.getBookingData();
+    this.bookingService.createBooking(formData).subscribe((res:any)=>{
+          if(res.result){
+            alert("Record inserted successfully");
+            this.getBookingData();       
+          }else{
+            alert(res.message);
+          }
+        })
+  }
+
+  deleteBooking(id:number){
+    this.bookingService.deleteBookingById(id).subscribe((res:any)=>{
+      if(res.result){
+        alert("record deleted successfully");
+        this.getBookingData();
+      }
+      else{
+        alert(res.message);
+      }
+    })
   }
 
   // updateBookingsData(data:any){

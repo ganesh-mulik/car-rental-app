@@ -98,7 +98,7 @@ export class CarsComponent implements OnInit{
       color:new FormControl(data.color),
       dailyRate:new FormControl(data.dailyRate),
       carImage:new FormControl(data.carImage),
-      regNo:new FormControl(data.regNo)    
+      regNo:new FormControl(data.regNo)   
   });
   }
 

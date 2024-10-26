@@ -17,7 +17,7 @@
                 <th> Name</th>
                 <th>Date</th>
                 <th>Mobile No</th>
-                <th>Booking UserId</th>
+                <th>Booking Id</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Discount</th>
@@ -32,12 +32,12 @@
                   <td>{{item.customerName}}</td>
                   <td>{{item.bookingDate}}</td>
                   <td>{{item.mobileNo}}</td>
-                  <td>{{item.bookingUid}}</td>
+                  <td>{{item.bookingId}}</td>
                   <td>{{item.brand}}</td>
                   <td>{{item.model}}</td>
                   <td>{{item.discount}}</td>
                   <td>{{item.totalBillAmount}}</td>
-                  <td class="action">Actions</td>
+                  <td class="action"><button class="btn btn-danger btn-sm" (click)="deleteBooking(item.bookingId)">Delete</button></td>
 
                   <!-- <td><button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" (click)="updateBookingsData(item)">Update</button>
                     <button class="btn btn-danger btn-sm">Delete</button></td> -->

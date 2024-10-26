@@ -12,14 +12,18 @@ export class BookingService{
     return this.http.get(`${this.apiUrl}geAllBookings`);
   }
 
+  // createBooking(data:any){
+  //   this.http.post(`${this.apiUrl}CreateNewBooking`,data).subscribe((res:any)=>{
+  //     if(res.result){
+  //       return alert("Record inserted successfully");        
+  //     }else{
+  //       return alert(res.message);
+  //     }
+  //   })
+  // }
+
   createBooking(data:any){
-    this.http.post(`${this.apiUrl}CreateNewBooking`,data).subscribe((res:any)=>{
-      if(res.result){
-        return alert("Record inserted successfully");        
-      }else{
-        return alert(res.message);
-      }
-    })
+    return this.http.post(`${this.apiUrl}CreateNewBooking`,data);
   }
 
   updateBooking(data:any){
@@ -30,5 +34,9 @@ export class BookingService{
         return res.message;
       }      
     })
+  }
+
+  deleteBookingById(id:number){
+    return this.http.delete(`${this.apiUrl}DeletBookingById?id=${id}`);
   }
 }
